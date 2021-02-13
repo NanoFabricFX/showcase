@@ -1,3 +1,11 @@
+- [Deployment on Kubernetes](#deployment-on-kubernetes)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+    - [Azure Resource Group Creation](#azure-resource-group-creation)
+      - [Alternative location](#alternative-location)
+    - [Azure Cluster Creation](#azure-cluster-creation)
+    - [Connect to your Azure cluster](#connect-to-your-azure-cluster)
+
 # Deployment on Kubernetes
 
 The following describes deploying dapr on kubernetes on an azure AKS cluster.
@@ -119,6 +127,12 @@ Here is a snippet of the list:
   }
 ...
 ```
+
+Another great way of selecting your prefered region is to visit: https://azureprice.net/Region.
+The ID column contains the name of the region you can use in the az cli, as well as the average VM costs indexed against other regions.
+
+For a graphical overview (worldmap) of regions and more details per region visit: https://azure.microsoft.com/en-us/global-infrastructure/geographies/
+
 
 ### Azure Cluster Creation
 
