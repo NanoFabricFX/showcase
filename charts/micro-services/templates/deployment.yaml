@@ -1,0 +1,46 @@
+{{- range .Values.range }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}-deployment
+  labels:
+    app: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "{{ .name }}"
+        dapr.io/app-port: "80"
+        dapr.io/config: "appconfig"
+        dapr.io/log-level: "info"
+      labels:
+        app: {{ .name }}
+        environment: development
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: {{ .image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}-service
+  labels:
+    app: {{ .name }}
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: {{ .name }}
+  type: ClusterIP
+{{- end }}
